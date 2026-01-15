@@ -11,76 +11,117 @@
 <body>
   <div class="app">
     <header>
-      <h1>
-        <span>QR</span>
-        <span>Generator</span>
-        <span class="light">Reader</span>
-        <span class="tag">Coming soon</span>
-      </h1>
-      <span class="scribble" aria-hidden="true"></span>
+      <h1>QR Machine</h1>
+      <p class="subtitle">Free. No login needed. By <a href="#" rel="noopener">Liankevich</a></p>
     </header>
 
-    <div class="grid">
-      <!-- LEFT -->
-      <section class="left">
-        <label class="title" for="data">Enter your text:</label>
-        <input id="data" class="input" type="text" placeholder="https://" autocomplete="off" />
-
-        <label class="title">Choose a style:</label>
-        <div class="tabs" id="styleTabs" role="tablist" aria-label="Style">
-          <button type="button" data-style="squares" class="active" role="tab" aria-selected="true">Squares</button>
-          <button type="button" data-style="dots" role="tab" aria-selected="false">Circles</button>
-          <button type="button" data-style="diamonds" role="tab" aria-selected="false">Rombs</button>
-        </div>
-
-        <label class="title">Shape color:</label>
-        <div class="color-row">
-          <input id="color" class="color-picker" type="color" value="#000000" />
-          <input id="colorHex" class="hex-input" type="text" value="#000000" maxlength="7" placeholder="#000000" />
-        </div>
-
-        <label class="title">Background:</label>
-        <div class="color-row">
-          <input id="bgColor" class="color-picker" type="color" value="#FFFFFF" />
-          <input id="bgColorHex" class="hex-input" type="text" value="#FFFFFF" maxlength="7" placeholder="#FFFFFF" />
-        </div>
-        <div class="checkbox-row">
-          <input type="checkbox" id="transparentBg" />
-          <label for="transparentBg">Transparent background</label>
-        </div>
-
-        <label class="title">File type:</label>
-        <div class="chips" id="typeChips" role="tablist" aria-label="File type">
-          <button type="button" data-type="svg" class="active" role="tab" aria-selected="true">SVG</button>
-          <button type="button" data-type="png" role="tab" aria-selected="false">PNG</button>
-          <button type="button" data-type="jpg" role="tab" aria-selected="false">JPG</button>
-        </div>
-
-        <div class="group" id="resolutionGroup">
-          <label class="title">Resolution:</label>
-          <div class="chips" id="resolutionChips" role="tablist" aria-label="Resolution">
-            <button type="button" data-size="512" role="tab" aria-selected="false">512</button>
-            <button type="button" data-size="1024" class="active" role="tab" aria-selected="true">1024</button>
-            <button type="button" data-size="2048" role="tab" aria-selected="false">2048</button>
-          </div>
-        </div>
-
-        <button class="btn secondary" id="dlBtn" disabled>Download</button>
-      </section>
-
-      <!-- RIGHT -->
-      <section class="right">
-        <div class="stage">
-          <div class="paper" id="paper">
-            <div class="placeholder">YOUR QR WILL BE HERE</div>
-          </div>
+    <main>
+      <!-- Your Link -->
+      <section class="section">
+        <label class="section-title" for="data">Your Link</label>
+        <div class="link-row">
+          <input id="data" class="input" type="text" placeholder="https://" autocomplete="off" />
+          <button class="paste-btn" id="pasteBtn" type="button">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 2C3.44772 2 3 2.44772 3 3V13C3 13.5523 3.44772 14 4 14H12C12.5523 14 13 13.5523 13 13V5.41421C13 5.149 12.8946 4.89464 12.7071 4.70711L10.2929 2.29289C10.1054 2.10536 9.851 2 9.58579 2H4ZM4 3H9V5H11V13H4V3Z" fill="currentColor"/>
+            </svg>
+            Paste
+          </button>
         </div>
       </section>
-    </div>
 
-    <footer>
-      Created by <a href="#" rel="noopener">Liankevich</a> / <a href="#" rel="noopener">Donate</a>
-    </footer>
+      <!-- Pattern Form -->
+      <section class="section">
+        <label class="section-title">Pattern Form</label>
+        <div class="pattern-options" id="styleTabs" role="tablist" aria-label="Pattern Form">
+          <button type="button" data-style="squares" class="pattern-btn active" role="tab" aria-selected="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="4" y="4" width="16" height="16" />
+            </svg>
+          </button>
+          <button type="button" data-style="dots" class="pattern-btn" role="tab" aria-selected="false">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="12" cy="12" r="8" />
+            </svg>
+          </button>
+          <button type="button" data-style="diamonds" class="pattern-btn" role="tab" aria-selected="false">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L22 12L12 22L2 12Z" />
+            </svg>
+          </button>
+          <button type="button" data-style="squares" class="pattern-btn" role="tab" aria-selected="false">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="4" y="4" width="16" height="16" />
+            </svg>
+          </button>
+          <button type="button" data-style="dots" class="pattern-btn" role="tab" aria-selected="false">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="12" cy="12" r="8" />
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- Colors -->
+      <section class="section">
+        <div class="two-columns">
+          <div class="column">
+            <label class="section-title">Pattern Color</label>
+            <div class="color-row">
+              <div class="color-swatch" style="background-color: #000000" id="colorSwatch"></div>
+              <input id="color" class="color-picker" type="color" value="#000000" />
+              <input id="colorHex" class="hex-input" type="text" value="#000000" maxlength="7" placeholder="#000000" />
+            </div>
+          </div>
+          <div class="column">
+            <label class="section-title">Background Color</label>
+            <div class="color-row">
+              <div class="color-swatch" style="background-color: #FFFFFF" id="bgColorSwatch"></div>
+              <input id="bgColor" class="color-picker" type="color" value="#FFFFFF" />
+              <input id="bgColorHex" class="hex-input" type="text" value="#FFFFFF" maxlength="7" placeholder="#FFFFFF" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- File Format & Resolution -->
+      <section class="section">
+        <div class="two-columns">
+          <div class="column">
+            <label class="section-title">File Format</label>
+            <div class="format-options" id="typeChips" role="tablist" aria-label="File Format">
+              <button type="button" data-type="svg" class="format-btn active" role="tab" aria-selected="true">
+                <span>SVG</span>
+                <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M13.5 4L6 11.5L2.5 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button type="button" data-type="png" class="format-btn" role="tab" aria-selected="false">PNG</button>
+              <button type="button" data-type="jpg" class="format-btn" role="tab" aria-selected="false">JPG</button>
+              <button type="button" data-type="esp" class="format-btn" role="tab" aria-selected="false">ESP</button>
+            </div>
+          </div>
+          <div class="column">
+            <label class="section-title">Image Resolution</label>
+            <div class="format-options" id="resolutionChips" role="tablist" aria-label="Image Resolution">
+              <button type="button" data-size="512" class="format-btn" role="tab" aria-selected="false">512</button>
+              <button type="button" data-size="1024" class="format-btn" role="tab" aria-selected="false">1024</button>
+              <button type="button" data-size="2048" class="format-btn" role="tab" aria-selected="false">2048</button>
+              <button type="button" data-size="4096" class="format-btn" role="tab" aria-selected="false">4096</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Download Button -->
+      <button class="download-btn" id="dlBtn" disabled>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 2V12M10 12L6 8M10 12L14 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 15V17C2 18.1046 2.89543 19 4 19H16C17.1046 19 18 18.1046 18 17V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Download
+      </button>
+    </main>
   </div>
 
   <!-- QR matrix lib -->
@@ -88,17 +129,17 @@
 
   <script>
     (() => {
-    // Elements
+      // Elements
       const $ = (s) => document.querySelector(s);
-      const paper = $('#paper');
       const dataEl = $('#data');
       const dlBtn = $('#dlBtn');
+      const pasteBtn = $('#pasteBtn');
       const colorEl = $('#color');
       const colorHexEl = $('#colorHex');
+      const colorSwatch = $('#colorSwatch');
       const bgColorEl = $('#bgColor');
       const bgColorHexEl = $('#bgColorHex');
-      const transparentBgEl = $('#transparentBg');
-      const resolutionGroup = $('#resolutionGroup');
+      const bgColorSwatch = $('#bgColorSwatch');
       const resolutionChips = $('#resolutionChips');
 
       // State
@@ -106,15 +147,21 @@
       let ftype = 'svg';
       let qrColor = '#000000';
       let bgColor = '#FFFFFF';
-      let transparentBg = false;
       let resolution = 1024;
 
       const styleTabs = $('#styleTabs');
       const typeChips = $('#typeChips');
 
-      function updateResolutionVisibility() {
-        resolutionGroup.classList.toggle('hidden', ftype === 'svg');
-      }
+      // Paste button
+      pasteBtn.addEventListener('click', async () => {
+        try {
+          const text = await navigator.clipboard.readText();
+          dataEl.value = text;
+          generateQR();
+        } catch (err) {
+          console.error('Failed to read clipboard:', err);
+        }
+      });
 
       function isValidHex(hex) {
         return /^#[0-9A-F]{6}$/i.test(hex);
@@ -124,7 +171,13 @@
       colorEl.addEventListener('input', (e) => {
         qrColor = e.target.value.toUpperCase();
         colorHexEl.value = qrColor;
+        colorSwatch.style.backgroundColor = qrColor;
         generateQR();
+      });
+
+      // Color swatch click -> open color picker
+      colorSwatch.addEventListener('click', () => {
+        colorEl.click();
       });
 
       // HEX input -> Color picker sync
@@ -134,6 +187,7 @@
         if (isValidHex(val)) {
           qrColor = val.toUpperCase();
           colorEl.value = qrColor;
+          colorSwatch.style.backgroundColor = qrColor;
           generateQR();
         }
       });
@@ -146,6 +200,7 @@
         } else {
           qrColor = val.toUpperCase();
           colorEl.value = qrColor;
+          colorSwatch.style.backgroundColor = qrColor;
           e.target.value = qrColor;
         }
       });
@@ -154,7 +209,13 @@
       bgColorEl.addEventListener('input', (e) => {
         bgColor = e.target.value.toUpperCase();
         bgColorHexEl.value = bgColor;
+        bgColorSwatch.style.backgroundColor = bgColor;
         generateQR();
+      });
+
+      // Background swatch click -> open color picker
+      bgColorSwatch.addEventListener('click', () => {
+        bgColorEl.click();
       });
 
       // Background HEX input -> Color picker sync
@@ -164,6 +225,7 @@
         if (isValidHex(val)) {
           bgColor = val.toUpperCase();
           bgColorEl.value = bgColor;
+          bgColorSwatch.style.backgroundColor = bgColor;
           generateQR();
         }
       });
@@ -176,18 +238,9 @@
         } else {
           bgColor = val.toUpperCase();
           bgColorEl.value = bgColor;
+          bgColorSwatch.style.backgroundColor = bgColor;
           e.target.value = bgColor;
         }
-      });
-
-      transparentBgEl.addEventListener('change', (e) => {
-        transparentBg = e.target.checked;
-        if (ftype === 'jpg' && transparentBg) {
-          transparentBg = false;
-          e.target.checked = false;
-          alert('JPG format does not support transparency');
-        }
-        generateQR();
       });
 
       // Auto-generate function
@@ -195,7 +248,6 @@
       function generateQR() {
         const text = (dataEl.value || '').trim();
         if (!text) {
-          paper.innerHTML = '<div class="placeholder">YOUR QR WILL BE HERE</div>';
           dlBtn.disabled = true;
           return;
         }
@@ -207,15 +259,13 @@
           revoke();
           dlBtn.disabled = true;
           const qr = buildQR(text);
-          if (ftype === 'svg') {
+          if (ftype === 'svg' || ftype === 'esp') {
             const svg = renderSVG(qr);
-            setPreview(svg);
             const blob = new Blob([new XMLSerializer().serializeToString(svg)], { type: 'image/svg+xml' });
             lastUrl = URL.createObjectURL(blob);
-            lastFmt = 'svg';
-      } else {
+            lastFmt = ftype === 'esp' ? 'svg' : 'svg';
+          } else {
             const canvas = renderCanvas(qr, resolution);
-            setPreview(canvas);
             const mime = ftype === 'jpg' ? 'image/jpeg' : 'image/png';
             lastUrl = await toBlobUrl(canvas, mime);
             lastFmt = ftype;
@@ -247,11 +297,6 @@
         btn.classList.add('active');
         btn.setAttribute('aria-selected', 'true');
         ftype = btn.dataset.type;
-        if (ftype === 'jpg' && transparentBg) {
-          transparentBg = false;
-          transparentBgEl.checked = false;
-        }
-        updateResolutionVisibility();
         generateQR();
       });
 
@@ -271,11 +316,8 @@
       // Generate on text input change
       dataEl.addEventListener('input', generateQR);
 
-      updateResolutionVisibility();
-
       let lastUrl = null;
       let lastFmt = null;
-      let lastName = 'qr-code';
 
       function revoke() {
         if (lastUrl) {
@@ -302,12 +344,8 @@
         const ctx = c.getContext('2d');
 
         // Background
-        if (transparentBg && ftype !== 'jpg') {
-          ctx.clearRect(0, 0, size, size);
-        } else {
-          ctx.fillStyle = bgColor;
-          ctx.fillRect(0, 0, size, size);
-        }
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, size, size);
 
         // QR shapes
         ctx.fillStyle = qrColor;
@@ -363,13 +401,11 @@
         svg.setAttribute('height', size);
 
         // Background
-        if (!transparentBg) {
-          const bg = document.createElementNS(xmlns, 'rect');
-          bg.setAttribute('fill', bgColor);
-          bg.setAttribute('width', size);
-          bg.setAttribute('height', size);
-          svg.appendChild(bg);
-        }
+        const bg = document.createElementNS(xmlns, 'rect');
+        bg.setAttribute('fill', bgColor);
+        bg.setAttribute('width', size);
+        bg.setAttribute('height', size);
+        svg.appendChild(bg);
 
         const g = document.createElementNS(xmlns, 'g');
         g.setAttribute('fill', qrColor);
@@ -408,22 +444,12 @@
         return svg;
       }
 
-      function setPreview(node) {
-        paper.innerHTML = '';
-        paper.appendChild(node);
-      }
-
       async function toBlobUrl(canvas, mime) {
         return new Promise((resolve) => {
           if (canvas.toBlob) {
-            if (mime === 'image/png' && transparentBg) {
-              canvas.toBlob(b => resolve(URL.createObjectURL(b)), mime, 1.0);
-            } else {
-              canvas.toBlob(b => resolve(URL.createObjectURL(b)), mime, 0.92);
-            }
-      } else {
-            const quality = (mime === 'image/png' && transparentBg) ? 1.0 : 0.92;
-            const dataUrl = canvas.toDataURL(mime, quality);
+            canvas.toBlob(b => resolve(URL.createObjectURL(b)), mime, 0.92);
+          } else {
+            const dataUrl = canvas.toDataURL(mime, 0.92);
             fetch(dataUrl).then(r => r.blob()).then(b => resolve(URL.createObjectURL(b)));
           }
         });
