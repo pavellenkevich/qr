@@ -39,7 +39,7 @@ header h1 {
 .subtitle {
   color: #ccc;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 300;
   margin: 0;
 }
 
@@ -66,7 +66,7 @@ main {
 
 .section-title {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
   color: #ffffff;
   margin: 0;
 }
@@ -81,8 +81,8 @@ main {
 
 .input {
   width: 100%;
-  padding: 16px 18px;
-  padding-right: 100px;
+  height: 60px;
+  padding: 16px 0px;
   background-color: #2a2a2a;
   border: 2px solid transparent;
   border-radius: 8px;
@@ -98,7 +98,7 @@ main {
 }
 
 .input:hover, .input:focus {
-  border: 2px solid #2a2a2a;
+  border: 2px solid #555;
 }
 
 .paste-btn {
@@ -111,7 +111,7 @@ main {
   background: none;
   color: #D9FF82;
   border: none;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
