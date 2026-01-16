@@ -201,8 +201,8 @@ main {
 }
 
 .color-swatch {
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
   border-radius: 8px;
   border: none;
   flex-shrink: 0;
@@ -212,8 +212,8 @@ main {
 
 .color-picker {
   position: absolute;
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
   padding: 0;
   border: none;
   border-radius: 8px;
@@ -279,12 +279,12 @@ main {
 .format-options {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0px;
 }
 
 .format-options-horizontal {
   flex-direction: row;
-  gap: 8px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
@@ -292,9 +292,9 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 0px 12px;
-  height: 40px;
+  gap: 6px;
+  padding: 0px;
+  height: 56px;
   background-color: transparent;
   border: none;
   color: #888888;
@@ -303,7 +303,7 @@ main {
   cursor: pointer;
   text-align: center;
   white-space: nowrap;
-  transition: all 0.2s;
+  transition: all 0.1s;
 }
 
 .format-options-horizontal .format-btn {
@@ -368,6 +368,7 @@ main {
 }
 
 /* Download Button */
+
 .download-btn {
   display: flex;
   align-items: center;
