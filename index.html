@@ -154,6 +154,7 @@
       const bgColorHexEl = $('#bgColorHex');
       const bgColorSwatch = $('#bgColorSwatch');
       const resolutionChips = $('#resolutionChips');
+      const previewQREl = $('#previewQR');
 
       // State
       let style = 'squares';
@@ -277,11 +278,15 @@
             const blob = new Blob([new XMLSerializer().serializeToString(svg)], { type: 'image/svg+xml' });
             lastUrl = URL.createObjectURL(blob);
             lastFmt = ftype === 'esp' ? 'svg' : 'svg';
+            previewQREl.innerHTML = '';
+            previewQREl.appendChild(svg.cloneNode(true));
           } else {
             const canvas = renderCanvas(qr, resolution);
             const mime = ftype === 'jpg' ? 'image/jpeg' : 'image/png';
             lastUrl = await toBlobUrl(canvas, mime);
             lastFmt = ftype;
+            previewQREl.innerHTML = '';
+            previewQREl.appendChild(canvas.cloneNode(true));
           }
           dlBtn.disabled = false;
         }, 300);
