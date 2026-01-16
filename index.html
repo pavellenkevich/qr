@@ -38,29 +38,19 @@
         <label class="section-title">Pattern Form</label>
         <div class="pattern-options" id="styleTabs" role="tablist" aria-label="Pattern Form">
           <button type="button" data-style="squares" class="pattern-btn active" role="tab" aria-selected="true">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
-              <rect x="4" y="4" width="16" height="16" />
-            </svg>
+            <img src="icons/icon_pattern_square.svg" alt="Square Pattern" height="48" />
           </button>
           <button type="button" data-style="dots" class="pattern-btn" role="tab" aria-selected="false">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <circle cx="12" cy="12" r="8" />
-            </svg>
+            <img src="icons/icon_pattern_circle.svg" alt="Circle Pattern" height="48" />
           </button>
           <button type="button" data-style="diamonds" class="pattern-btn" role="tab" aria-selected="false">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2L22 12L12 22L2 12Z" />
-            </svg>
+            <img src="icons/icon_pattern_romb.svg" alt="Diamond Pattern" height="48" />
           </button>
-          <button type="button" data-style="squares" class="pattern-btn" role="tab" aria-selected="false">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <rect x="4" y="4" width="16" height="16" />
-            </svg>
+          <button type="button" data-style="hearts" class="pattern-btn" role="tab" aria-selected="false">
+            <img src="icons/icon_pattern_heart.svg" alt="Heart Pattern" height="48" />
           </button>
-          <button type="button" data-style="dots" class="pattern-btn" role="tab" aria-selected="false">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <circle cx="12" cy="12" r="8" />
-            </svg>
+          <button type="button" data-style="stars" class="pattern-btn" role="tab" aria-selected="false">
+            <img src="icons/icon_pattern_star.svg" alt="Star Pattern" height="48" />
           </button>
         </div>
       </section>
@@ -393,6 +383,28 @@
               }
             }
           }
+        } else if (style === 'hearts') {
+          const s = scale * 0.6;
+          for (let rIdx = 0; rIdx < modules; rIdx++) {
+            for (let cIdx = 0; cIdx < modules; cIdx++) {
+              if (qr.isDark(rIdx, cIdx)) {
+                const cx = off + cIdx * scale + scale / 2;
+                const cy = off + rIdx * scale + scale / 2;
+                drawHeart(ctx, cx, cy, s);
+              }
+            }
+          }
+        } else if (style === 'stars') {
+          const r = scale * 0.5;
+          for (let rIdx = 0; rIdx < modules; rIdx++) {
+            for (let cIdx = 0; cIdx < modules; cIdx++) {
+              if (qr.isDark(rIdx, cIdx)) {
+                const cx = off + cIdx * scale + scale / 2;
+                const cy = off + rIdx * scale + scale / 2;
+                drawStar(ctx, cx, cy, 5, r, r * 0.4);
+              }
+            }
+          }
         } else {
           for (let rIdx = 0; rIdx < modules; rIdx++) {
             for (let cIdx = 0; cIdx < modules; cIdx++) {
@@ -403,6 +415,34 @@
           }
         }
         return c;
+      }
+
+      function drawHeart(ctx, cx, cy, size) {
+        ctx.beginPath();
+        const x = cx - size / 2;
+        const y = cy - size / 2;
+        ctx.moveTo(x + size / 2, y + size);
+        ctx.quadraticCurveTo(x, y + size / 3, x, y + size / 3);
+        ctx.quadraticCurveTo(x, y, x + size / 4, y);
+        ctx.quadraticCurveTo(x + size / 2, y - size / 4, x + size / 2, y - size / 4);
+        ctx.quadraticCurveTo(x + size / 2, y - size / 4, x + size * 0.75, y);
+        ctx.quadraticCurveTo(x + size, y, x + size, y + size / 3);
+        ctx.quadraticCurveTo(x + size, y + size / 3, x + size / 2, y + size);
+        ctx.fill();
+      }
+
+      function drawStar(ctx, cx, cy, points, outerRadius, innerRadius) {
+        ctx.beginPath();
+        for (let i = 0; i < points * 2; i++) {
+          const radius = i % 2 === 0 ? outerRadius : innerRadius;
+          const angle = (i * Math.PI) / points - Math.PI / 2;
+          const x = cx + radius * Math.cos(angle);
+          const y = cy + radius * Math.sin(angle);
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.fill();
       }
 
       function renderSVG(qr) {
@@ -446,6 +486,12 @@
                 rect.setAttribute('height', cell);
                 gg.appendChild(rect);
                 g.appendChild(gg);
+              } else if (style === 'hearts') {
+                const heart = createHeartPath(x + cell / 2, y + cell / 2, cell * 0.6);
+                g.appendChild(heart);
+              } else if (style === 'stars') {
+                const star = createStarPath(x + cell / 2, y + cell / 2, 5, cell * 0.5, cell * 0.2);
+                g.appendChild(star);
               } else {
                 const rect = document.createElementNS(xmlns, 'rect');
                 rect.setAttribute('x', x);
@@ -458,6 +504,32 @@
           }
         }
         return svg;
+      }
+
+      function createHeartPath(cx, cy, size) {
+        const xmlns = 'http://www.w3.org/2000/svg';
+        const path = document.createElementNS(xmlns, 'path');
+        const x = cx - size / 2;
+        const y = cy - size / 2;
+        const d = `M ${x + size / 2} ${y + size} Q ${x} ${y + size / 3} ${x} ${y + size / 3} Q ${x} ${y} ${x + size / 4} ${y} Q ${x + size / 2} ${y - size / 4} ${x + size / 2} ${y - size / 4} Q ${x + size / 2} ${y - size / 4} ${x + size * 0.75} ${y} Q ${x + size} ${y} ${x + size} ${y + size / 3} Q ${x + size} ${y + size / 3} ${x + size / 2} ${y + size}`;
+        path.setAttribute('d', d);
+        return path;
+      }
+
+      function createStarPath(cx, cy, points, outerRadius, innerRadius) {
+        const xmlns = 'http://www.w3.org/2000/svg';
+        const path = document.createElementNS(xmlns, 'path');
+        let d = '';
+        for (let i = 0; i < points * 2; i++) {
+          const radius = i % 2 === 0 ? outerRadius : innerRadius;
+          const angle = (i * Math.PI) / points - Math.PI / 2;
+          const x = cx + radius * Math.cos(angle);
+          const y = cy + radius * Math.sin(angle);
+          d += (i === 0 ? 'M' : 'L') + ` ${x} ${y}`;
+        }
+        d += ' Z';
+        path.setAttribute('d', d);
+        return path;
       }
 
       async function toBlobUrl(canvas, mime) {

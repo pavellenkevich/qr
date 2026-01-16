@@ -131,30 +131,36 @@ main {
 
 .pattern-options {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
 .pattern-btn {
-  width: 48px;
+  width: auto;
   height: 48px;
   padding: 0;
   background-color: transparent;
   border: none;
-  color: #ccc;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.pattern-btn img {
+  height: 48px;
+  width: auto;
+  display: block;
 }
 
 .pattern-btn:hover {
-  color: #fff;
+  opacity: 0.8;
 }
 
 .pattern-btn.active {
-  color: #D9FF82;
+  opacity: 1;
 }
 
 /* Colors */
