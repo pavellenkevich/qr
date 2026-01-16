@@ -170,7 +170,7 @@ main {
   position: relative;
 }
 
-/* .color-swatch {
+.color-swatch {
   width: 48px;
   height: 48px;
   border-radius: 8px;
@@ -182,7 +182,7 @@ main {
 
 .color-swatch:hover {
   border-color: #66c888;
-} */
+}
 
 .color-picker {
   position: absolute;
