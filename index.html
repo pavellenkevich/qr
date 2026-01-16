@@ -24,7 +24,7 @@
       <!-- Your Link -->
       <section class="section">
         <label class="section-title" for="data">Your Link</label>
-        <div class="link-row">
+        <div class="input-wrapper">
           <input id="data" class="input" type="text" placeholder="https://" autocomplete="off" />
           <button class="paste-btn" id="pasteBtn" type="button">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,34 +89,42 @@
         </div>
       </section>
 
-      <!-- File Format & Resolution -->
-      <section class="section">
-        <div class="two-columns">
-          <div class="column">
-            <label class="section-title">File Format</label>
-            <div class="format-options" id="typeChips" role="tablist" aria-label="File Format">
-              <button type="button" data-type="svg" class="format-btn active" role="tab" aria-selected="true">
-                <span>SVG</span>
-                <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M13.5 4L6 11.5L2.5 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-              <button type="button" data-type="png" class="format-btn" role="tab" aria-selected="false">PNG</button>
-              <button type="button" data-type="jpg" class="format-btn" role="tab" aria-selected="false">JPG</button>
-              <button type="button" data-type="esp" class="format-btn" role="tab" aria-selected="false">ESP</button>
+      <!-- Settings Container -->
+      <div class="settings-container">
+        <!-- File Format & Resolution -->
+        <section class="section">
+          <div class="format-resolution-row">
+            <div class="format-column">
+              <label class="section-title">File Format</label>
+              <div class="format-options" id="typeChips" role="tablist" aria-label="File Format">
+                <button type="button" data-type="svg" class="format-btn active" role="tab" aria-selected="true">
+                  <span>SVG</span>
+                  <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.5 4L6 11.5L2.5 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                <button type="button" data-type="png" class="format-btn" role="tab" aria-selected="false">PNG</button>
+                <button type="button" data-type="jpg" class="format-btn" role="tab" aria-selected="false">JPG</button>
+                <button type="button" data-type="esp" class="format-btn" role="tab" aria-selected="false">ESP</button>
+              </div>
+            </div>
+            <div class="format-column">
+              <label class="section-title">Image Resolution</label>
+              <div class="format-options" id="resolutionChips" role="tablist" aria-label="Image Resolution">
+                <button type="button" data-size="512" class="format-btn" role="tab" aria-selected="false">512</button>
+                <button type="button" data-size="1024" class="format-btn" role="tab" aria-selected="false">1024</button>
+                <button type="button" data-size="2048" class="format-btn" role="tab" aria-selected="false">2048</button>
+                <button type="button" data-size="4096" class="format-btn" role="tab" aria-selected="false">4096</button>
+              </div>
             </div>
           </div>
-          <div class="column">
-            <label class="section-title">Image Resolution</label>
-            <div class="format-options" id="resolutionChips" role="tablist" aria-label="Image Resolution">
-              <button type="button" data-size="512" class="format-btn" role="tab" aria-selected="false">512</button>
-              <button type="button" data-size="1024" class="format-btn" role="tab" aria-selected="false">1024</button>
-              <button type="button" data-size="2048" class="format-btn" role="tab" aria-selected="false">2048</button>
-              <button type="button" data-size="4096" class="format-btn" role="tab" aria-selected="false">4096</button>
-            </div>
-          </div>
+        </section>
+
+        <!-- QR Preview -->
+        <div class="qr-preview">
+          <div id="previewQR" class="preview-canvas"></div>
         </div>
-      </section>
+      </div>
 
       <!-- Download Button -->
       <button class="download-btn" id="dlBtn" disabled>
