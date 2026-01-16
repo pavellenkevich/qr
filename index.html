@@ -38,19 +38,29 @@
         <label class="section-title">Pattern Form</label>
         <div class="pattern-options" id="styleTabs" role="tablist" aria-label="Pattern Form">
           <button type="button" data-style="squares" class="pattern-btn active" role="tab" aria-selected="true">
-            <img src="icons/icon_pattern_square.svg" alt="Square Pattern" height="48" />
+            <svg class="pattern-icon" width="40" height="48" viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect y="4" width="40" height="40" fill="currentColor"/>
+            </svg>
           </button>
           <button type="button" data-style="dots" class="pattern-btn" role="tab" aria-selected="false">
-            <img src="icons/icon_pattern_circle.svg" alt="Circle Pattern" height="48" />
+            <svg class="pattern-icon" width="44" height="48" viewBox="0 0 44 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="22" cy="24" r="22" fill="currentColor"/>
+            </svg>
           </button>
           <button type="button" data-style="diamonds" class="pattern-btn" role="tab" aria-selected="false">
-            <img src="icons/icon_pattern_romb.svg" alt="Diamond Pattern" height="48" />
+            <svg class="pattern-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 24L24 0L48 24L24 48L0 24Z" fill="currentColor"/>
+            </svg>
           </button>
           <button type="button" data-style="hearts" class="pattern-btn" role="tab" aria-selected="false">
-            <img src="icons/icon_pattern_heart.svg" alt="Heart Pattern" height="48" />
+            <svg class="pattern-icon" width="44" height="48" viewBox="0 0 44 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22 44L18.81 41.1226C7.48 30.9428 0 24.2071 0 15.9891C0 9.25341 5.324 4 12.1 4C15.928 4 19.602 5.76567 22 8.53406C24.398 5.76567 28.072 4 31.9 4C38.676 4 44 9.25341 44 15.9891C44 24.2071 36.52 30.9428 25.19 41.1226L22 44Z" fill="currentColor"/>
+            </svg>
           </button>
           <button type="button" data-style="stars" class="pattern-btn" role="tab" aria-selected="false">
-            <img src="icons/icon_pattern_star.svg" alt="Star Pattern" height="48" />
+            <svg class="pattern-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M23.9988 39.5365L12.3651 46.5687C11.8511 46.8968 11.3138 47.0375 10.7532 46.9906C10.1925 46.9437 9.70191 46.7562 9.28142 46.428C8.86092 46.0998 8.53387 45.6901 8.30026 45.1988C8.06665 44.7075 8.01993 44.1561 8.16009 43.5448L11.2437 30.254L0.941565 21.3231C0.474346 20.9011 0.182802 20.4201 0.0669313 19.8801C-0.0489389 19.34 -0.0143649 18.813 0.170654 18.2992C0.355672 17.7854 0.636003 17.3635 1.01165 17.0334C1.38729 16.7034 1.90123 16.4924 2.55347 16.4005L16.1495 15.205L21.4057 2.68773C21.6394 2.12515 22.0019 1.70322 22.4934 1.42193C22.9849 1.14064 23.4867 1 23.9988 1C24.5109 1 25.0127 1.14064 25.5042 1.42193C25.9957 1.70322 26.3583 2.12515 26.5919 2.68773L31.8481 15.205L45.4441 16.4005C46.0982 16.4943 46.6122 16.7052 46.986 17.0334C47.3597 17.3616 47.6401 17.7835 47.827 18.2992C48.0138 18.8149 48.0493 19.3428 47.9335 19.8829C47.8176 20.4229 47.5251 20.903 47.056 21.3231L36.7539 30.254L39.8375 43.5448C39.9777 44.1543 39.931 44.7056 39.6974 45.1988C39.4637 45.692 39.1367 46.1017 38.7162 46.428C38.2957 46.7543 37.8051 46.9418 37.2445 46.9906C36.6838 47.0393 36.1465 46.8987 35.6325 46.5687L23.9988 39.5365Z" fill="currentColor"/>
+            </svg>
           </button>
         </div>
       </section>
@@ -87,7 +97,7 @@
           <div class="format-resolution-row">
             <div class="format-column">
               <label class="section-title">File Format</label>
-              <div class="format-options" id="typeChips" role="tablist" aria-label="File Format">
+              <div class="format-options format-options-horizontal" id="typeChips" role="tablist" aria-label="File Format">
                 <button type="button" data-type="svg" class="format-btn active" role="tab" aria-selected="true">
                   <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M13.5 4L6 11.5L2.5 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -116,7 +126,7 @@
             </div>
             <div class="format-column">
               <label class="section-title">Image Resolution</label>
-              <div class="format-options" id="resolutionChips" role="tablist" aria-label="Image Resolution">
+              <div class="format-options format-options-horizontal" id="resolutionChips" role="tablist" aria-label="Image Resolution">
                 <button type="button" data-size="512" class="format-btn" role="tab" aria-selected="false">512</button>
                 <button type="button" data-size="1024" class="format-btn" role="tab" aria-selected="false">1024</button>
                 <button type="button" data-size="2048" class="format-btn" role="tab" aria-selected="false">2048</button>
@@ -129,9 +139,16 @@
 
       <!-- Download Button -->
       <button class="download-btn" id="dlBtn" disabled>
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 2V12M10 12L6 8M10 12L14 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M2 15V17C2 18.1046 2.89543 19 4 19H16C17.1046 19 18 18.1046 18 17V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_36_3488)">
+            <path d="M16 2L16 20M16 20L24 12.5M16 20L8 12.5" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 24V26C2 28.2091 3.79086 30 6 30H26C28.2091 30 30 28.2091 30 26V24" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <defs>
+            <clipPath id="clip0_36_3488">
+              <rect width="32" height="32" fill="white"/>
+            </clipPath>
+          </defs>
         </svg>
         Download
       </button>

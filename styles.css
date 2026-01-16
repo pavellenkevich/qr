@@ -164,12 +164,19 @@ main {
   fill: #ccc;
 }
 
-.pattern-btn:hover {
-  fill: #fff;
+.pattern-btn svg.pattern-icon {
+  height: 48px;
+  width: auto;
+  display: block;
+  color: #ccc;
 }
 
-.pattern-btn.active {
-  fill: #D9FF82;
+.pattern-btn:hover svg.pattern-icon {
+  color: #fff;
+}
+
+.pattern-btn.active svg.pattern-icon {
+  color: #D9FF82;
 }
 
 /* Colors */
@@ -275,20 +282,33 @@ main {
   gap: 8px;
 }
 
+.format-options-horizontal {
+  flex-direction: row;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
 .format-btn {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0px;
-  height: 56px;
+  justify-content: center;
+  gap: 8px;
+  padding: 0px 12px;
+  height: 40px;
   background-color: transparent;
   border: none;
   color: #888888;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  text-align: left;
+  text-align: center;
+  white-space: nowrap;
   transition: all 0.2s;
+}
+
+.format-options-horizontal .format-btn {
+  width: auto;
+  flex-shrink: 0;
 }
 
 .format-btn:hover {
