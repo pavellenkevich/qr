@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>QR Machine</title>
+  <title>QR Tongue</title>
   <meta name="description" content="Minimal QR code generator: SVG / PNG / JPG with style options" />
   <meta name="theme-color" content="#f2f2f2" />
   <link rel="stylesheet" href="styles.css" />
@@ -15,8 +15,8 @@
   <div class="app">
 
     <header>
-      <h1>QR Machine</h1>
-      <p class="subtitle">Free. No login needed. By <a href="#" rel="noopener">Liankevich ↗</a></p>
+      <h1>QR Tongue</h1>
+      <p class="subtitle">Fully free. No ads. No login needed. By <a href="#" rel="noopener">Paulik Liankevich ↗</a></p>
     </header>
 
     <main>
@@ -78,22 +78,40 @@
       </section>
 
       <!-- Settings Container -->
+
       <div class="settings-container">
+
         <!-- File Format & Resolution -->
+
         <section class="section">
           <div class="format-resolution-row">
             <div class="format-column">
               <label class="section-title">File Format</label>
               <div class="format-options" id="typeChips" role="tablist" aria-label="File Format">
                 <button type="button" data-type="svg" class="format-btn active" role="tab" aria-selected="true">
-                  <span>SVG</span>
                   <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M13.5 4L6 11.5L2.5 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
+                  <span>SVG</span>
                 </button>
-                <button type="button" data-type="png" class="format-btn" role="tab" aria-selected="false">PNG</button>
-                <button type="button" data-type="jpg" class="format-btn" role="tab" aria-selected="false">JPG</button>
-                <button type="button" data-type="esp" class="format-btn" role="tab" aria-selected="false">ESP</button>
+                <button type="button" data-type="png" class="format-btn" role="tab" aria-selected="false">
+                  <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.5 4L6 11.5L2.5 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span>PNG</span>
+                </button>
+                <button type="button" data-type="jpg" class="format-btn" role="tab" aria-selected="false">
+                  <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.5 4L6 11.5L2.5 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span>JPG</span>
+                </button>
+                <button type="button" data-type="esp" class="format-btn" role="tab" aria-selected="false">
+                  <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.5 4L6 11.5L2.5 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span>EPS</span>
+                </button>
               </div>
             </div>
             <div class="format-column">
