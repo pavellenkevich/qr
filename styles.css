@@ -30,17 +30,7 @@ html, body {
   padding: 0;
 }
 
-.app > :not(header):not(main) {
-  padding: 48px;
-}
-
-header {
-  padding: 48px 48px 0 48px;
-  grid-column: 1 / -1;
-}
-
 main {
-  padding: 0 48px 48px 48px;
   grid-column: 1;
   grid-row: 2;
   overflow-y: auto;
