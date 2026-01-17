@@ -49,7 +49,6 @@ main {
 }
 
 header {
-  grid-column: 1;
   margin-bottom: 0;
 }
 
@@ -95,6 +94,8 @@ main {
   font-weight: 600;
   color: #ffffff;
   margin: 0;
+  pointer-events: none;
+  cursor: default;
 }
 
 /* Your Link */
@@ -332,15 +333,6 @@ main {
 .format-btn.active .check-icon {
   display: block;
   color: #D9FF82;
-}
-
-.qr-section {
-  grid-column: 2;
-  grid-row: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
 }
 
 .qr-preview {
