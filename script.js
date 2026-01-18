@@ -119,6 +119,7 @@
   let generateTimeout = null;
   function generateQR(animate = true) {
     const text = (dataEl.value || '').trim();
+    const main = document.querySelector('main');
     if (!text) {
       dlBtn.disabled = true;
       previewQREl.innerHTML = '';
@@ -126,8 +127,20 @@
       if (animate) {
         tongueEl.classList.add('raised');
       }
+      // Add disabled state to all sections except input section
+      main.querySelectorAll('.section').forEach(section => {
+        if (!section.contains(dataEl)) {
+          section.classList.add('disabled-content');
+        }
+      });
+      dlBtn.classList.add('disabled-content');
       return;
     }
+    // Remove disabled state when text is present
+    main.querySelectorAll('.section').forEach(section => {
+      section.classList.remove('disabled-content');
+    });
+    dlBtn.classList.remove('disabled-content');
     if (typeof window.qrcode !== 'function') return;
 
     // Raise tongue at start of generation (only if animating)
@@ -524,4 +537,34 @@
   resolutionChips.classList.add('disabled');
   resolutionChips.closest('.format-column').querySelector('.section-title').classList.add('disabled');
   generateQR();
+
+  // Parallax effect for pupils following the cursor
+  const pupils = document.querySelectorAll('.pupil');
+  const maxOffset = 24; // Maximum offset in pixels
+
+  document.addEventListener('mousemove', (e) => {
+    pupils.forEach((pupil) => {
+      const white = pupil.closest('.white');
+      const whiteRect = white.getBoundingClientRect();
+      const pupilRect = pupil.getBoundingClientRect();
+
+      // Center of the white part
+      const whiteCenterX = whiteRect.left + whiteRect.width / 2;
+      const whiteCenterY = whiteRect.top + whiteRect.height / 2;
+
+      // Calculate angle and distance from cursor to white center
+      const dx = e.clientX - whiteCenterX;
+      const dy = e.clientY - whiteCenterY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      // Calculate offset based on angle, limited by maxOffset
+      if (distance > 0) {
+        const angle = Math.atan2(dy, dx);
+        const offsetX = Math.cos(angle) * Math.min(maxOffset, distance * 0.1);
+        const offsetY = Math.sin(angle) * Math.min(maxOffset, distance * 0.1);
+
+        pupil.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+      }
+    });
+  });
 })();

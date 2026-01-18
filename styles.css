@@ -20,6 +20,12 @@ html, body {
   display: none !important;
 }
 
+.disabled-content {
+  opacity: 0.3;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
 .app {
   display: flex;
   flex-direction: row;
@@ -277,7 +283,7 @@ header h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 4px;
   padding: 0px;
   height: 48px;
   background-color: transparent;
@@ -315,11 +321,47 @@ header h1 {
 /* QR Preview */
 
 .qr-container {
-  height: 412px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: start;
+  gap: 60px;
+}
+
+#eyes {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 56px;
+}
+
+.eye {
+  width: 144px;
+  height: 144px;
+  background: #555;
+  border-radius: 72px;
+  box-shadow: 0 10px 0 #2a2a2a;
+}
+
+.white {
+  width: 80px;
+  height: 80px;
+  background: #fff;
+  border-radius: 40px;
+  margin: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pupil {
+  width: 32px;
+  height: 32px;
+  background: #2a2a2a;
+  border-radius: 16px;
+  transition: transform 0.1s ease-out;
 }
 
 #lips {
@@ -413,6 +455,7 @@ header h1 {
   cursor: pointer;
   padding: 0px 100px;
   width: fit-content;
+  transition: all 0.2s ease;
 }
 
 .download-btn:hover:not(:disabled) {
@@ -424,6 +467,6 @@ header h1 {
 }
 
 .download-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.2;
   cursor: not-allowed;
 }
