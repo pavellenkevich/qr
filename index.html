@@ -17,7 +17,7 @@
     <main>
 
       <header>
-        <h1>QR Tongue</h1>
+        <h1>QR Machine</h1>
         <p class="subtitle">Fully free. No ads. No login needed. By <a href="#" rel="noopener">Paulik Liankevich ↗</a></p>
       </header>
 
@@ -154,10 +154,10 @@
 
       <!-- Download Button -->
       <button class="download-btn" id="dlBtn" disabled>
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g clip-path="url(#clip0_36_3488)">
-            <path d="M16 2L16 20M16 20L24 12.5M16 20L8 12.5" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M2 24V26C2 28.2091 3.79086 30 6 30H26C28.2091 30 30 28.2091 30 26V24" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 2L16 20M16 20L24 12.5M16 20L8 12.5" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 24V26C2 28.2091 3.79086 30 6 30H26C28.2091 30 30 28.2091 30 26V24" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
           </g>
           <defs>
             <clipPath id="clip0_36_3488">
@@ -170,20 +170,18 @@
     </main>
 
     <!-- QR Preview -->
-    <div class="qr-preview">
-      <div id="machine_eyes">
-        <div class="eye">
-          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="32" cy="32" r="80" fill="#fff"/>
-          </svg>
-        </div>
-        <div class="eye">
-          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="32" cy="32" r="80" fill="#fff"/>
-          </svg>
+    <div class="qr-container">
+      <div id="lips">
+        <div id="mouth">
+          <div id="tongue">
+            <div id="tongue-top"></div>
+            <div id="previewQR" class="preview-canvas"></div> 
+            <svg xmlns="http://www.w3.org/2000/svg" width="300" height="20" viewBox="0 0 300 20" fill="none">
+              <path d="M300 0H0V20H37.5L75 14.3624L112.5 20H148.026H187.5L225 14.3624H267.434L300 16.3624V0Z" fill="white"/>
+            </svg>
+          </div>
         </div>
       </div>
-      <div id="previewQR" class="preview-canvas"></div>
     </div>
   </div>
 
