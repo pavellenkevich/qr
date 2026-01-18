@@ -12,6 +12,7 @@
   const bgColorSwatch = $('#bgColorSwatch');
   const resolutionChips = $('#resolutionChips');
   const previewQREl = $('#previewQR');
+  const tongueEl = $('#tongue');
 
   // State
   let style = 'squares';
@@ -116,15 +117,23 @@
 
   // Auto-generate function
   let generateTimeout = null;
-  function generateQR() {
+  function generateQR(animate = true) {
     const text = (dataEl.value || '').trim();
     if (!text) {
       dlBtn.disabled = true;
       previewQREl.innerHTML = '';
       previewQREl.appendChild(drawRedCross());
+      if (animate) {
+        tongueEl.classList.add('raised');
+      }
       return;
     }
     if (typeof window.qrcode !== 'function') return;
+
+    // Raise tongue at start of generation (only if animating)
+    if (animate) {
+      tongueEl.classList.add('raised');
+    }
 
     // Debounce generation
     clearTimeout(generateTimeout);
@@ -132,20 +141,27 @@
       revoke();
       dlBtn.disabled = true;
       const qr = buildQR(text);
-      if (ftype === 'svg' || ftype === 'esp') {
-        const svg = renderSVG(qr);
+      
+      // Always show SVG in preview
+      const svg = renderSVG(qr);
+      previewQREl.innerHTML = '';
+      previewQREl.appendChild(svg.cloneNode(true));
+      
+      // Prepare download in selected format
+      if (ftype === 'svg') {
         const blob = new Blob([new XMLSerializer().serializeToString(svg)], { type: 'image/svg+xml' });
         lastUrl = URL.createObjectURL(blob);
-        lastFmt = ftype === 'esp' ? 'svg' : 'svg';
-        previewQREl.innerHTML = '';
-        previewQREl.appendChild(svg.cloneNode(true));
+        lastFmt = 'svg';
       } else {
+        // Always regenerate canvas for raster formats to ensure correct resolution
         const canvas = renderCanvas(qr, resolution);
         const mime = ftype === 'jpg' ? 'image/jpeg' : 'image/png';
         lastUrl = await toBlobUrl(canvas, mime);
         lastFmt = ftype;
-        previewQREl.innerHTML = '';
-        previewQREl.appendChild(canvas.cloneNode(true));
+      }
+      
+      if (animate) {
+        tongueEl.classList.remove('raised');
       }
       dlBtn.disabled = false;
     }, 300);
@@ -174,7 +190,38 @@
     btn.classList.add('active');
     btn.setAttribute('aria-selected', 'true');
     ftype = btn.dataset.type;
-    generateQR();
+    
+    // Get the parent format-column of resolutionChips to access the label
+    const dimensionLabel = resolutionChips.closest('.format-column').querySelector('.section-title');
+    
+    // Disable resolution options when SVG is selected
+    if (ftype === 'svg') {
+      resolutionChips.classList.add('disabled');
+      dimensionLabel.classList.add('disabled');
+      
+      // Reset all resolution buttons to default (no selection)
+      resolutionChips.querySelectorAll('button').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+    } else {
+      resolutionChips.classList.remove('disabled');
+      dimensionLabel.classList.remove('disabled');
+      
+      // Auto-select 1024 for raster formats
+      resolution = 1024;
+      resolutionChips.querySelectorAll('button').forEach(b => {
+        if (b.dataset.size === '1024') {
+          b.classList.add('active');
+          b.setAttribute('aria-selected', 'true');
+        } else {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        }
+      });
+    }
+    
+    generateQR(false);
   });
 
   resolutionChips.addEventListener('click', (e) => {
@@ -187,7 +234,7 @@
     btn.classList.add('active');
     btn.setAttribute('aria-selected', 'true');
     resolution = parseInt(btn.dataset.size, 10);
-    generateQR();
+    generateQR(false);
   });
 
   // Generate on text input change
@@ -339,7 +386,7 @@
     line1.setAttribute('y1', margin);
     line1.setAttribute('x2', size - margin);
     line1.setAttribute('y2', size - margin);
-    line1.setAttribute('stroke', '#FF0000');
+    line1.setAttribute('stroke', '#ff000000');
     line1.setAttribute('stroke-width', strokeWidth);
     line1.setAttribute('stroke-linecap', 'round');
     svg.appendChild(line1);
@@ -349,7 +396,7 @@
     line2.setAttribute('y1', margin);
     line2.setAttribute('x2', margin);
     line2.setAttribute('y2', size - margin);
-    line2.setAttribute('stroke', '#FF0000');
+    line2.setAttribute('stroke', '#ff000000');
     line2.setAttribute('stroke-width', strokeWidth);
     line2.setAttribute('stroke-linecap', 'round');
     svg.appendChild(line2);
@@ -472,4 +519,9 @@
     a.click();
     a.remove();
   });
+
+  // Initialize with red cross on page load
+  resolutionChips.classList.add('disabled');
+  resolutionChips.closest('.format-column').querySelector('.section-title').classList.add('disabled');
+  generateQR();
 })();

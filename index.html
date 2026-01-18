@@ -112,12 +112,6 @@
                 </svg>
                 <span>JPG</span>
               </button>
-              <button type="button" data-type="esp" class="format-btn" role="tab" aria-selected="false">
-                <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M13.5 4L6 11.5L2.5 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span>EPS</span>
-              </button>
             </div>
           </div>
           <div class="format-column">
@@ -172,13 +166,16 @@
     <!-- QR Preview -->
     <div class="qr-container">
       <div id="lips">
-        <div id="mouth">
-          <div id="tongue">
-            <div id="tongue-top"></div>
-            <div id="previewQR" class="preview-canvas"></div> 
-            <svg xmlns="http://www.w3.org/2000/svg" width="300" height="20" viewBox="0 0 300 20" fill="none">
-              <path d="M300 0H0V20H37.5L75 14.3624L112.5 20H148.026H187.5L225 14.3624H267.434L300 16.3624V0Z" fill="white"/>
-            </svg>
+        <div id="mouth-container">
+          <div id="mouth">
+            <div class="shadow"></div>
+            <div id="tongue">
+              <div id="tongue-top"></div>
+              <div id="previewQR" class="preview-canvas"></div> 
+              <svg xmlns="http://www.w3.org/2000/svg" width="300" height="20" viewBox="0 0 300 20" fill="none">
+                <path d="M300 0H0V20H37.5L75 14.3624L112.5 20H148.026H187.5L225 14.3624H267.434L300 16.3624V0Z" fill="white"/>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
