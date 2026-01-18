@@ -36,7 +36,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  padding: 0;
+  padding: 48px 0px;
   align-items: stretch;
   height: 100vh;
   overflow-x: hidden;
@@ -48,7 +48,7 @@ main {
 header h1 {
   font-size: 52px;
   font-weight: 800;
-  margin-bottom: 4px;
+  margin: 0px 4px 0px 0px;
   color: #ffffff;
 }
 
