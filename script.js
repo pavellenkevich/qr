@@ -82,6 +82,8 @@
     bgColor = e.target.value.toUpperCase();
     bgColorHexEl.value = bgColor;
     bgColorSwatch.style.backgroundColor = bgColor;
+    document.getElementById('tongue-top').style.backgroundColor = bgColor;
+    document.querySelector('#tongue svg path').setAttribute('fill', bgColor);
     generateQR();
   });
 
@@ -98,6 +100,8 @@
       bgColor = val.toUpperCase();
       bgColorEl.value = bgColor;
       bgColorSwatch.style.backgroundColor = bgColor;
+      document.getElementById('tongue-top').style.backgroundColor = bgColor;
+      document.querySelector('#tongue svg path').setAttribute('fill', bgColor);
       generateQR();
     }
   });
@@ -111,6 +115,8 @@
       bgColor = val.toUpperCase();
       bgColorEl.value = bgColor;
       bgColorSwatch.style.backgroundColor = bgColor;
+      document.getElementById('tongue-top').style.backgroundColor = bgColor;
+      document.querySelector('#tongue svg path').setAttribute('fill', bgColor);
       e.target.value = bgColor;
     }
   });
@@ -538,33 +544,86 @@
   resolutionChips.closest('.format-column').querySelector('.section-title').classList.add('disabled');
   generateQR();
 
-  // Parallax effect for pupils following the cursor
-  const pupils = document.querySelectorAll('.pupil');
-  const maxOffset = 24; // Maximum offset in pixels
+  // Initialize tongue-top and SVG colors
+  document.getElementById('tongue-top').style.backgroundColor = bgColor;
+  document.querySelector('#tongue svg path').setAttribute('fill', bgColor);
 
-  document.addEventListener('mousemove', (e) => {
-    pupils.forEach((pupil) => {
-      const white = pupil.closest('.white');
-      const whiteRect = white.getBoundingClientRect();
-      const pupilRect = pupil.getBoundingClientRect();
+  // Parallax effect for pupils following the cursor (smoothed)
+const pupils = Array.from(document.querySelectorAll('.pupil'));
 
-      // Center of the white part
-      const whiteCenterX = whiteRect.left + whiteRect.width / 2;
-      const whiteCenterY = whiteRect.top + whiteRect.height / 2;
+const state = pupils.map((pupil) => {
+  const white = pupil.closest('.white');
+  return {
+    pupil,
+    white,
+    cx: 0,
+    cy: 0,
+    tx: 0,  // target x
+    ty: 0,  // target y
+    x: 0,   // current x
+    y: 0,   // current y
+  };
+});
 
-      // Calculate angle and distance from cursor to white center
-      const dx = e.clientX - whiteCenterX;
-      const dy = e.clientY - whiteCenterY;
-      const distance = Math.sqrt(dx * dx + dy * dy);
+// Настройки
+const maxOffset = 24;     // максимум смещения (px)
+const sensitivity = 0.12; // насколько сильно реагирует на дистанцию
+const smoothing = 0.18;   // 0..1 (чем больше, тем быстрее догоняет)
 
-      // Calculate offset based on angle, limited by maxOffset
-      if (distance > 0) {
-        const angle = Math.atan2(dy, dx);
-        const offsetX = Math.cos(angle) * Math.min(maxOffset, distance * 0.1);
-        const offsetY = Math.sin(angle) * Math.min(maxOffset, distance * 0.1);
-
-        pupil.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-      }
-    });
+// Обновляем центры глаз (не на каждый mousemove)
+function updateEyeCenters() {
+  state.forEach((s) => {
+    const r = s.white.getBoundingClientRect();
+    s.cx = r.left + r.width / 2;
+    s.cy = r.top + r.height / 2;
   });
+}
+updateEyeCenters();
+window.addEventListener('resize', updateEyeCenters);
+window.addEventListener('scroll', updateEyeCenters, { passive: true });
+
+// Храним курсор
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+
+  // считаем target’ы тут, но без DOM-измерений
+  state.forEach((s) => {
+    const dx = mouseX - s.cx;
+    const dy = mouseY - s.cy;
+    const dist = Math.hypot(dx, dy) || 1;
+
+    // Нормализуем направление
+    const nx = dx / dist;
+    const ny = dy / dist;
+
+    // Сила = dist * sensitivity, но ограничиваем maxOffset
+    const mag = Math.min(maxOffset, dist * sensitivity);
+
+    s.tx = nx * mag;
+    s.ty = ny * mag;
+  });
+}, { passive: true });
+
+// Рендерим плавно
+let rafId = null;
+function animate() {
+  state.forEach((s) => {
+    s.x += (s.tx - s.x) * smoothing;
+    s.y += (s.ty - s.y) * smoothing;
+
+    // округление чуть убирает микродрожь на сабпикселях
+    const x = Math.round(s.x * 100) / 100;
+    const y = Math.round(s.y * 100) / 100;
+
+    s.pupil.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+  });
+
+  rafId = requestAnimationFrame(animate);
+}
+if (!rafId) animate();
+
 })();
