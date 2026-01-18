@@ -120,6 +120,8 @@
     const text = (dataEl.value || '').trim();
     if (!text) {
       dlBtn.disabled = true;
+      previewQREl.innerHTML = '';
+      previewQREl.appendChild(drawRedCross());
       return;
     }
     if (typeof window.qrcode !== 'function') return;
@@ -314,6 +316,47 @@
     ctx.fill();
   }
 
+  function drawRedCross() {
+    const xmlns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(xmlns, 'svg');
+    const size = 256;
+    svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
+    svg.setAttribute('width', size);
+    svg.setAttribute('height', size);
+
+    // Background
+    const bg = document.createElementNS(xmlns, 'rect');
+    bg.setAttribute('fill', bgColor);
+    bg.setAttribute('width', size);
+    bg.setAttribute('height', size);
+    svg.appendChild(bg);
+
+    // Red cross
+    const strokeWidth = 20;
+    const margin = 40;
+    const line1 = document.createElementNS(xmlns, 'line');
+    line1.setAttribute('x1', margin);
+    line1.setAttribute('y1', margin);
+    line1.setAttribute('x2', size - margin);
+    line1.setAttribute('y2', size - margin);
+    line1.setAttribute('stroke', '#FF0000');
+    line1.setAttribute('stroke-width', strokeWidth);
+    line1.setAttribute('stroke-linecap', 'round');
+    svg.appendChild(line1);
+
+    const line2 = document.createElementNS(xmlns, 'line');
+    line2.setAttribute('x1', size - margin);
+    line2.setAttribute('y1', margin);
+    line2.setAttribute('x2', margin);
+    line2.setAttribute('y2', size - margin);
+    line2.setAttribute('stroke', '#FF0000');
+    line2.setAttribute('stroke-width', strokeWidth);
+    line2.setAttribute('stroke-linecap', 'round');
+    svg.appendChild(line2);
+
+    return svg;
+  }
+
   function renderSVG(qr) {
     const modules = qr.getModuleCount();
     const quiet = 4;
@@ -411,6 +454,14 @@
       }
     });
   }
+
+  dlBtn.addEventListener('mouseenter', () => {
+    dataEl.classList.add('wobble');
+  });
+
+  dlBtn.addEventListener('mouseleave', () => {
+    dataEl.classList.remove('wobble');
+  });
 
   dlBtn.addEventListener('click', () => {
     if (!lastUrl) return;

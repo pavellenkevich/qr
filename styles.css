@@ -425,3 +425,23 @@ header h1 {
     aspect-ratio: 1;
   }
 }
+
+/* Wobble Animation */
+@keyframes wobble {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-8px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(8px);
+  }
+}
+
+.input.wobble {
+  animation: wobble 0.6s ease-in-out infinite;
+}
