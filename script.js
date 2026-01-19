@@ -24,6 +24,21 @@
   const styleTabs = $('#styleTabs');
   const typeChips = $('#typeChips');
 
+  // Check clipboard and update paste button state
+  async function updatePasteButtonState() {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (text.trim()) {
+        pasteBtn.classList.remove('disabled');
+      } else {
+        pasteBtn.classList.add('disabled');
+      }
+    } catch (err) {
+      // If we can't read clipboard (permissions), disable the button
+      pasteBtn.classList.add('disabled');
+    }
+  }
+
   // Paste button
   pasteBtn.addEventListener('click', async () => {
     try {
@@ -34,6 +49,10 @@
       console.error('Failed to read clipboard:', err);
     }
   });
+
+  // Update paste button state on load and when input changes
+  updatePasteButtonState();
+  dataEl.addEventListener('input', updatePasteButtonState);
 
   function isValidHex(hex) {
     return /^#[0-9A-F]{6}$/i.test(hex);
