@@ -39,11 +39,19 @@
     return /^#[0-9A-F]{6}$/i.test(hex);
   }
 
+  function hexToRgba(hex, opacity) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+  }
+
   // Color picker -> HEX input sync
   colorEl.addEventListener('input', (e) => {
     qrColor = e.target.value.toUpperCase();
     colorHexEl.value = qrColor;
     colorSwatch.style.backgroundColor = qrColor;
+    document.getElementById('tongue-top').style.borderBottomColor = hexToRgba(qrColor, 0.2);
     generateQR();
   });
 
@@ -60,6 +68,7 @@
       qrColor = val.toUpperCase();
       colorEl.value = qrColor;
       colorSwatch.style.backgroundColor = qrColor;
+      document.getElementById('tongue-top').style.borderBottomColor = hexToRgba(qrColor, 0.2);
       generateQR();
     }
   });
@@ -73,6 +82,7 @@
       qrColor = val.toUpperCase();
       colorEl.value = qrColor;
       colorSwatch.style.backgroundColor = qrColor;
+      document.getElementById('tongue-top').style.borderBottomColor = hexToRgba(qrColor, 0.2);
       e.target.value = qrColor;
     }
   });
@@ -312,7 +322,7 @@
           if (qr.isDark(rIdx, cIdx)) {
             const x = off + cIdx * scale;
             const y = off + rIdx * scale;
-            const diamondSize = scale * 0.85;
+            const diamondSize = scale * 0.765;
             ctx.save();
             ctx.translate(x + scale / 2, y + scale / 2);
             ctx.rotate(Math.PI / 4);
@@ -322,7 +332,7 @@
         }
       }
     } else if (style === 'hearts') {
-      const s = scale * 0.6;
+      const s = scale * 0.84;
       for (let rIdx = 0; rIdx < modules; rIdx++) {
         for (let cIdx = 0; cIdx < modules; cIdx++) {
           if (qr.isDark(rIdx, cIdx)) {
@@ -333,7 +343,7 @@
         }
       }
     } else if (style === 'stars') {
-      const r = scale * 0.5;
+      const r = scale * 0.6;
       for (let rIdx = 0; rIdx < modules; rIdx++) {
         for (let cIdx = 0; cIdx < modules; cIdx++) {
           if (qr.isDark(rIdx, cIdx)) {
@@ -458,7 +468,7 @@
             circ.setAttribute('r', Math.floor(cell * 0.5));
             g.appendChild(circ);
           } else if (style === 'diamonds') {
-            const diamondSize = cell * 0.85;
+            const diamondSize = cell * 0.765;
             const offset = (cell - diamondSize) / 2;
             const gg = document.createElementNS(xmlns, 'g');
             gg.setAttribute('transform', `translate(${x + cell / 2} ${y + cell / 2}) rotate(45) translate(${-diamondSize / 2} ${-diamondSize / 2})`);
@@ -468,10 +478,10 @@
             gg.appendChild(rect);
             g.appendChild(gg);
           } else if (style === 'hearts') {
-            const heart = createHeartPath(x + cell / 2, y + cell / 2, cell * 0.6);
+            const heart = createHeartPath(x + cell / 2, y + cell / 2, cell * 0.84);
             g.appendChild(heart);
           } else if (style === 'stars') {
-            const star = createStarPath(x + cell / 2, y + cell / 2, 5, cell * 0.5, cell * 0.2);
+            const star = createStarPath(x + cell / 2, y + cell / 2, 5, cell * 0.6, cell * 0.24);
             g.appendChild(star);
           } else {
             const rect = document.createElementNS(xmlns, 'rect');
@@ -549,6 +559,7 @@
 
   // Initialize tongue-top and SVG colors
   document.getElementById('tongue-top').style.backgroundColor = bgColor;
+  document.getElementById('tongue-top').style.borderBottomColor = hexToRgba(qrColor, 0.2);
   document.querySelector('#tongue svg path').setAttribute('fill', bgColor);
 
   // Parallax effect for pupils following the cursor (smoothed)
