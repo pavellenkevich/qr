@@ -78,12 +78,14 @@ header h1 {
 }
 
 .section-title {
-  font-size: 22px;
-  font-weight: 700;
+  /* font-size: 22px;
+  font-weight: 700; */
+  font-size: 18px;
+  font-weight: 600;
   color: #ffffff;
   margin: 0;
-  pointer-events: none;
-  cursor: default;
+  /* pointer-events: none; */
+  /* cursor: default; */
 }
 
 /* Your Link */
@@ -208,7 +210,7 @@ header h1 {
 .color-row {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   position: relative;
 }
 
@@ -341,7 +343,7 @@ header h1 {
   font-size: 24px;
   font-weight: 700;
   cursor: pointer;
-  padding: 0px 100px;
+  padding: 0px 80px;
   width: fit-content;
   transition: all 0.15s ease;
 }
