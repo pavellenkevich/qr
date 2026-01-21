@@ -24,21 +24,6 @@
   const styleTabs = $('#styleTabs');
   const typeChips = $('#typeChips');
 
-  // Check clipboard and update paste button state
-  async function updatePasteButtonState() {
-    try {
-      const text = await navigator.clipboard.readText();
-      if (text.trim()) {
-        pasteBtn.classList.remove('disabled');
-      } else {
-        pasteBtn.classList.add('disabled');
-      }
-    } catch (err) {
-      // If we can't read clipboard (permissions), disable the button
-      pasteBtn.classList.add('disabled');
-    }
-  }
-
   // Paste button
   pasteBtn.addEventListener('click', async () => {
     try {
@@ -49,10 +34,6 @@
       console.error('Failed to read clipboard:', err);
     }
   });
-
-  // Update paste button state on load and when input changes
-  updatePasteButtonState();
-  dataEl.addEventListener('input', updatePasteButtonState);
 
   function isValidHex(hex) {
     return /^#[0-9A-F]{6}$/i.test(hex);
@@ -331,10 +312,11 @@
           if (qr.isDark(rIdx, cIdx)) {
             const x = off + cIdx * scale;
             const y = off + rIdx * scale;
+            const diamondSize = scale * 0.85;
             ctx.save();
             ctx.translate(x + scale / 2, y + scale / 2);
             ctx.rotate(Math.PI / 4);
-            ctx.fillRect(-scale / 2, -scale / 2, scale, scale);
+            ctx.fillRect(-diamondSize / 2, -diamondSize / 2, diamondSize, diamondSize);
             ctx.restore();
           }
         }
@@ -476,11 +458,13 @@
             circ.setAttribute('r', Math.floor(cell * 0.5));
             g.appendChild(circ);
           } else if (style === 'diamonds') {
+            const diamondSize = cell * 0.85;
+            const offset = (cell - diamondSize) / 2;
             const gg = document.createElementNS(xmlns, 'g');
-            gg.setAttribute('transform', `translate(${x + cell / 2} ${y + cell / 2}) rotate(45) translate(${-cell / 2} ${-cell / 2})`);
+            gg.setAttribute('transform', `translate(${x + cell / 2} ${y + cell / 2}) rotate(45) translate(${-diamondSize / 2} ${-diamondSize / 2})`);
             const rect = document.createElementNS(xmlns, 'rect');
-            rect.setAttribute('width', cell);
-            rect.setAttribute('height', cell);
+            rect.setAttribute('width', diamondSize);
+            rect.setAttribute('height', diamondSize);
             gg.appendChild(rect);
             g.appendChild(gg);
           } else if (style === 'hearts') {
