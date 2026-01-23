@@ -366,17 +366,16 @@
   }
 
   function drawHeart(ctx, cx, cy, size) {
-    ctx.beginPath();
-    const x = cx - size / 2;
-    const y = cy - size / 2;
-    ctx.moveTo(x + size / 2, y + size);
-    ctx.quadraticCurveTo(x, y + size / 3, x, y + size / 3);
-    ctx.quadraticCurveTo(x, y, x + size / 4, y);
-    ctx.quadraticCurveTo(x + size / 2, y - size / 4, x + size / 2, y - size / 4);
-    ctx.quadraticCurveTo(x + size / 2, y - size / 4, x + size * 0.75, y);
-    ctx.quadraticCurveTo(x + size, y, x + size, y + size / 3);
-    ctx.quadraticCurveTo(x + size, y + size / 3, x + size / 2, y + size);
-    ctx.fill();
+    // Original viewBox from icon_pattern_heart: 0 0 44 48
+    const scale = size / 44;
+    const offsetX = cx - 22 * scale;
+    const offsetY = cy - 24 * scale;
+    
+    // Create path from icon_pattern_heart.svg
+    const pathData = `M ${22 * scale + offsetX} ${44 * scale + offsetY}L${18.81 * scale + offsetX} ${41.1226 * scale + offsetY}C${7.48 * scale + offsetX} ${30.9428 * scale + offsetY} ${0 * scale + offsetX} ${24.2071 * scale + offsetY} ${0 * scale + offsetX} ${15.9891 * scale + offsetY}C${0 * scale + offsetX} ${9.25341 * scale + offsetY} ${5.324 * scale + offsetX} ${4 * scale + offsetY} ${12.1 * scale + offsetX} ${4 * scale + offsetY}C${15.928 * scale + offsetX} ${4 * scale + offsetY} ${19.602 * scale + offsetX} ${5.76567 * scale + offsetY} ${22 * scale + offsetX} ${8.53406 * scale + offsetY}C${24.398 * scale + offsetX} ${5.76567 * scale + offsetY} ${28.072 * scale + offsetX} ${4 * scale + offsetY} ${31.9 * scale + offsetX} ${4 * scale + offsetY}C${38.676 * scale + offsetX} ${4 * scale + offsetY} ${44 * scale + offsetX} ${9.25341 * scale + offsetY} ${44 * scale + offsetX} ${15.9891 * scale + offsetY}C${44 * scale + offsetX} ${24.2071 * scale + offsetY} ${36.52 * scale + offsetX} ${30.9428 * scale + offsetY} ${25.19 * scale + offsetX} ${41.1226 * scale + offsetY}L${22 * scale + offsetX} ${44 * scale + offsetY}Z`;
+    
+    const path2D = new Path2D(pathData);
+    ctx.fill(path2D);
   }
 
   function drawStar(ctx, cx, cy, points, outerRadius, innerRadius) {
@@ -500,9 +499,16 @@
   function createHeartPath(cx, cy, size) {
     const xmlns = 'http://www.w3.org/2000/svg';
     const path = document.createElementNS(xmlns, 'path');
-    const x = cx - size / 2;
-    const y = cy - size / 2;
-    const d = `M ${x + size / 2} ${y + size} Q ${x} ${y + size / 3} ${x} ${y + size / 3} Q ${x} ${y} ${x + size / 4} ${y} Q ${x + size / 2} ${y - size / 4} ${x + size / 2} ${y - size / 4} Q ${x + size / 2} ${y - size / 4} ${x + size * 0.75} ${y} Q ${x + size} ${y} ${x + size} ${y + size / 3} Q ${x + size} ${y + size / 3} ${x + size / 2} ${y + size}`;
+    
+    // Original viewBox from icon_pattern_heart: 0 0 44 48
+    // Original path positioned with center at (22, 24)
+    const scale = size / 44; // Scale to fit size
+    const offsetX = cx - 22 * scale;
+    const offsetY = cy - 24 * scale;
+    
+    // Path from icon_pattern_heart.svg, scaled and positioned
+    const d = `M ${22 * scale + offsetX} ${44 * scale + offsetY}L${18.81 * scale + offsetX} ${41.1226 * scale + offsetY}C${7.48 * scale + offsetX} ${30.9428 * scale + offsetY} ${0 * scale + offsetX} ${24.2071 * scale + offsetY} ${0 * scale + offsetX} ${15.9891 * scale + offsetY}C${0 * scale + offsetX} ${9.25341 * scale + offsetY} ${5.324 * scale + offsetX} ${4 * scale + offsetY} ${12.1 * scale + offsetX} ${4 * scale + offsetY}C${15.928 * scale + offsetX} ${4 * scale + offsetY} ${19.602 * scale + offsetX} ${5.76567 * scale + offsetY} ${22 * scale + offsetX} ${8.53406 * scale + offsetY}C${24.398 * scale + offsetX} ${5.76567 * scale + offsetY} ${28.072 * scale + offsetX} ${4 * scale + offsetY} ${31.9 * scale + offsetX} ${4 * scale + offsetY}C${38.676 * scale + offsetX} ${4 * scale + offsetY} ${44 * scale + offsetX} ${9.25341 * scale + offsetY} ${44 * scale + offsetX} ${15.9891 * scale + offsetY}C${44 * scale + offsetX} ${24.2071 * scale + offsetY} ${36.52 * scale + offsetX} ${30.9428 * scale + offsetY} ${25.19 * scale + offsetX} ${41.1226 * scale + offsetY}L${22 * scale + offsetX} ${44 * scale + offsetY}Z`;
+    
     path.setAttribute('d', d);
     return path;
   }

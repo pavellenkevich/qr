@@ -44,13 +44,13 @@ main {
   padding: 48px 0px;
   align-items: stretch;
   overflow-x: hidden;
-  width: 520px
+  width: 440px;
 }
 
 header h1 {
   font-size: 52px;
   font-weight: 800;
-  margin: 0px 6px 0px 0px;
+  margin: 0px 0px 4px 0px;
   color: #ffffff;
 }
 
@@ -266,7 +266,7 @@ header h1 {
 }
 
 .format-column {
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   flex-direction: column;
   gap: 0px;
@@ -275,7 +275,7 @@ header h1 {
 .format-options-horizontal {
   display: flex;
   flex-direction: row;
-  gap: 0px 12px;
+  gap: 0px 8px;
   flex-wrap: wrap;
 }
 
@@ -334,16 +334,16 @@ header h1 {
   align-items: center;
   justify-content: center;
   gap: 16px;
-  height: 72px;
+  height: 68px;
   flex-shrink: 0;
   background-color: #D9FF82;
   color: #111;
   border: none;
   border-radius: 8px;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   cursor: pointer;
-  padding: 0px 80px;
+  padding: 0px 60px;
   width: fit-content;
   transition: all 0.15s ease;
 }
