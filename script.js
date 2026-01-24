@@ -586,9 +586,16 @@ const state = pupils.map((pupil) => {
 });
 
 // Настройки
-const maxOffset = 24;     // максимум смещения (px)
+let maxOffset = 24;     // максимум смещения (px)
 const sensitivity = 0.12; // насколько сильно реагирует на дистанцию
 const smoothing = 0.18;   // 0..1 (чем больше, тем быстрее догоняет)
+
+// Проверяем размер экрана для маленького брейкпоинта
+const checkScreenSize = () => {
+  maxOffset = window.innerWidth <= 540 ? 8 : 24;
+};
+checkScreenSize();
+window.addEventListener('resize', checkScreenSize);
 
 // Обновляем центры глаз (не на каждый mousemove)
 function updateEyeCenters() {

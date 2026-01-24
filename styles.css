@@ -13,7 +13,7 @@ html, body {
   font-family: Inter, sans-serif;
   background-color: #333;
   color: #ffffff;
-  overflow: hidden;
+  /* overflow: auto; */
 }
 
 .hidden {
@@ -29,7 +29,7 @@ html, body {
 .app {
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  min-height: 100vh;
   align-items: center;
   justify-content: center;
   overflow-y: auto;
@@ -52,7 +52,7 @@ main {
   padding: 48px 0px;
   align-items: stretch;
   overflow-x: hidden;
-  width: 440px;
+  width: 460px;
 }
 
 @media (max-width: 1200px) {
@@ -331,7 +331,7 @@ header h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 2px;
   padding: 0px;
   height: 48px;
   background-color: transparent;
@@ -387,12 +387,6 @@ header h1 {
   transition: all 0.15s ease;
 }
 
-@media (max-width: 540px) {
-  .download-btn {
-    width: 100%;
-  }
-}
-
 .download-btn:hover:not(:disabled) {
   background-color: #c8e66f;
 }
@@ -415,6 +409,9 @@ header h1 {
   align-items: center;
   justify-content: start;
   gap: 44px;
+  position: sticky;
+  top: calc(50vh - 270px);
+  align-self: center;
 }
 
 #eyes {
@@ -470,70 +467,6 @@ header h1 {
   overflow: hidden;
 }
 
-@media (max-width: 1200px) {
-  .qr-container {
-    height: 328px;
-    gap: 28px;
-  }
-
-  #eyes {
-    gap: 24px;
-  }
-
-  .eye {
-    width: 80px;
-    height: 80px;
-    border-radius: 40px;
-    box-shadow: 0 6px 0 #2a2a2a;
-  }
-
-  .white {
-    width: 48px;
-    height: 48px;
-    border-radius: 24px;
-    margin: 16px;
-  }
-
-  .pupil {
-    width: 16px;
-    height: 16px;
-    border-radius: 8px;
-  }
-
-  #lips {
-    width: 280px;
-    height: 90px;
-    padding: 16px;
-    border-radius: 45px;
-    box-shadow: 0 6px 0 #2a2a2a;
-  }
-
-  #mouth-container {
-    height: 204px;
-  }
-
-  #mouth {
-    width: 248px;
-    height: 58px;
-    border-radius: 29px;
-  }
-
-  .shadow {
-    width: 180px;
-    height: 16px;
-  }
-
-  #tongue-top {
-    height: 22px;
-  }
-
-  #previewQR svg,
-  #previewQR canvas {
-    width: 180px;
-    height: 180px;
-  }
-}
-
 #mouth {
   width: 370px;
   height: 58px;
@@ -587,4 +520,90 @@ header h1 {
   max-width: 100%;
   max-height: 100%;
   display: block;
+}
+
+#tongue-bottom {
+    width: 300px;
+    height: 10px;
+  }
+
+@media (max-width: 1200px) {
+  
+  .download-btn {
+    width: 100%;
+  }
+  
+  .qr-container {
+    height: 328px;
+    gap: 28px;
+    margin-bottom: 48px;
+    margin-right: 180px;
+  }
+
+  #eyes {
+    gap: 24px;
+  }
+
+  .eye {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    box-shadow: 0 6px 0 #2a2a2a;
+  }
+
+  .white {
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    margin: 16px;
+  }
+
+  .pupil {
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+  }
+
+  #lips {
+    width: 280px;
+    height: 90px;
+    padding: 16px;
+    border-radius: 45px;
+    box-shadow: 0 6px 0 #2a2a2a;
+  }
+
+  #mouth-container {
+    height: 204px;
+  }
+
+  #mouth {
+    width: 248px;
+    height: 58px;
+    border-radius: 29px;
+  }
+
+  .shadow {
+    width: 180px;
+    height: 16px;
+  }
+
+  #tongue-top {
+    width: 180px;
+    height: 16px;
+  }
+
+  #previewQR {
+    width: 180px;
+  }
+
+  #previewQR svg,
+  #previewQR canvas {
+    width: 180px;
+    height: 180px;
+  }
+
+  #tongue-bottom {
+    width: 180px;
+    height: 6px;
+  }
 }
