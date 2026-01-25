@@ -592,7 +592,7 @@ const smoothing = 0.18;   // 0..1 (чем больше, тем быстрее д
 
 // Проверяем размер экрана для маленького брейкпоинта
 const checkScreenSize = () => {
-  maxOffset = window.innerWidth <= 540 ? 8 : 24;
+  maxOffset = window.innerWidth <= 1200 ? 16 : 24;
 };
 checkScreenSize();
 window.addEventListener('resize', checkScreenSize);
